@@ -1,43 +1,43 @@
 import "./todoList.css";
 import Input from './Components/Input.jsx'
 import List from './Components/List.jsx'
-import { useState } from "react";
+import { useReducer } from "react";
+import todoListReducer from "./todoListLogic.js";
 
 function TodoList() {
 
-  const[tasks, setTasks] = useState([]);
+  const[tasks, dispatch] = useReducer(todoListReducer, []);
 
-  const addTask = (task) => {
-    let newTasks = [];
-    tasks == [] ? newTasks=task : newTasks = [...tasks, task]
-    
-    setTasks(newTasks);
-    console.log(newTasks);
+  function handleAddTask(task) {
+    dispatch({
+      type: 'add',
+      task: task,
+      taskId: null,
+    });
   }
 
-  const moveUp = (taskId, task) => {
-    let newTasks = [...tasks];
-    newTasks.splice(taskId, 1);
-    newTasks.splice(taskId - 1, 0, task);
-    setTasks(newTasks);
-    console.log(newTasks);
+  function handleMoveUp(taskId, task) {
+    dispatch({
+      type: 'moveUp',
+      task: task,
+      taskId: taskId,
+    });
   }
 
-  const moveDown = (taskId, task) => {
-    //remove(taskId) porq no se puede llamar a la funcion q borra un elemento
-    let newTasks = [...tasks];
-    newTasks.splice(taskId, 1);
-    newTasks.splice(taskId+1, 0, task);
-    setTasks(newTasks);
-    console.log(newTasks);
+  function handleMoveDown(taskId, task) {
+    dispatch({
+      type: 'moveDown',
+      task: task,
+      taskId: taskId,
+    });
   }
 
-  const remove = (taskId) => {
-    console.log(taskId);
-    let newTasks = [...tasks];
-    newTasks.splice(taskId, 1);
-    setTasks(newTasks);
-    console.log(newTasks);
+  function handleRemove(taskId) {
+    dispatch({
+      type: 'remove',
+      task: null,
+      taskId: taskId,
+    });
   }
   
   return (
@@ -46,8 +46,8 @@ function TodoList() {
         <h1 className="h1 text-center bg-primary text-white py-2 mt-2">
           To-do list
         </h1>
-        <Input addTask={addTask}/>
-        <List moveUp={moveUp} moveDown={moveDown} remove={remove}>
+        <Input addTask={handleAddTask}/>
+        <List moveUp={handleMoveUp} moveDown={handleMoveDown} remove={handleRemove}>
           {tasks}
         </List>
       </div>
