@@ -1,11 +1,12 @@
 import "./todoList.css";
 import Input from './Components/Input.jsx'
 import List from './Components/List.jsx'
-import { useReducer } from "react";
+import { createContext, useReducer } from "react";
 import todoListReducer from "./todoListLogic.js";
 
-function TodoList() {
+export const TasksHandlersContext = createContext(null);
 
+function TodoList() {
   const[tasks, dispatch] = useReducer(todoListReducer, []);
 
   function handleAddTask(task) {
@@ -15,7 +16,6 @@ function TodoList() {
       taskId: null,
     });
   }
-
   function handleMoveUp(taskId, task) {
     dispatch({
       type: 'moveUp',
@@ -23,7 +23,6 @@ function TodoList() {
       taskId: taskId,
     });
   }
-
   function handleMoveDown(taskId, task) {
     dispatch({
       type: 'moveDown',
@@ -31,7 +30,6 @@ function TodoList() {
       taskId: taskId,
     });
   }
-
   function handleRemove(taskId) {
     dispatch({
       type: 'remove',
@@ -46,10 +44,12 @@ function TodoList() {
         <h1 className="h1 text-center bg-primary text-white py-2 mt-2">
           To-do list
         </h1>
-        <Input addTask={handleAddTask}/>
-        <List moveUp={handleMoveUp} moveDown={handleMoveDown} remove={handleRemove}>
-          {tasks}
-        </List>
+        <TasksHandlersContext.Provider value={{handleAddTask, handleMoveUp, handleMoveDown, handleRemove}}>
+          <Input />
+          <List>
+            {tasks}
+          </List>
+        </TasksHandlersContext.Provider>
       </div>
     </div>
   );

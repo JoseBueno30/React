@@ -5,10 +5,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import TodoList from "./todoList.jsx";
 
+import Song from "./test/components/Song.jsx";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <TodoList />
+    <div>
+      <div className="container-fluid">
+        <Song/>
+      </div>
+    </div>
   </React.StrictMode>
 );
 
