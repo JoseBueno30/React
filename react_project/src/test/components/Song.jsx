@@ -6,15 +6,15 @@ import removeButton from '../../Resources/removeTask.png';
 export default function Song(){
     return(
         
-            <div className='song card'>
-                <span class='border'><PlayButton/></span>
+            <div className='song'>
+                <span class=''><PlayButton/></span>
                 <div class='container-fluid'>
-                    <div class='row border'>
+                    <div class='row'>
                         <span class='col '>Nombre</span>
                         <span class='col '>autor</span>
                         <span class='col '>album</span>
                         <span class='col-1'>mm:ss</span>
-                        <span class='col-1 '>:</span>
+                        <span class='col-1 border'>:</span>
                     </div>
                 </div>
                 
