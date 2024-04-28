@@ -1,6 +1,5 @@
 import React from "react";
-import removeButton from '../../Resources/removeTask.png';
-
+import { FaEllipsisVertical, FaPlay } from "react-icons/fa6";
 
 
 export default function Song(){
@@ -10,11 +9,13 @@ export default function Song(){
                 <span class=''><PlayButton/></span>
                 <div class='container-fluid'>
                     <div class='row'>
-                        <span class='col '>Nombre</span>
-                        <span class='col '>autor</span>
-                        <span class='col '>album</span>
-                        <span class='col-1'>mm:ss</span>
-                        <span class='col-1 border'>:</span>
+                        <div class='col ms-3 d-flex flex-column flex-md-row justify-content-md-between align-items-md-center'>
+                            <div class="name ">Nombre</div>
+                            <div class="author ">autor</div>
+                        </div>
+                        <div class='col d-none d-md-flex justify-content-center  album'>album</div>
+                        <div class='col-3 col-md-2 time'>mm:ss</div>
+                        <div class='d-flex justify-content-center col-md-1 col-2 '><FaEllipsisVertical /></div>
                     </div>
                 </div>
                 
@@ -25,8 +26,9 @@ export default function Song(){
 
 function PlayButton(){
     return(
-        <div className="playButton">
-            a
+        <div className="playContainer">
+            <image></image>
+            <div class="playButton"><FaPlay/></div>
         </div>
     );
 } 
